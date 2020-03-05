@@ -1,0 +1,2 @@
+-> Run EchoApp in cmd with "Dotnet Run EchoApp.csproj"
+-> Navigate to localhost:5000
