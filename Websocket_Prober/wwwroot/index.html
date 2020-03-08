@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -107,7 +107,7 @@
             if (!socket || socket.readyState !== WebSocket.OPEN) {
                 alert("socket not connected");
             }
-            var data = "{\"a\": 0, \"b\": 1}"
+            var data = "{\"A1\":0,\"A2\":1,\"A3\":1}"
             socket.send(data);
             commsLog.innerHTML += '<tr>' +
                 '<td class="commslog-client">Client</td>' +

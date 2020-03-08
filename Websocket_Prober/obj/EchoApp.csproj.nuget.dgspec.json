@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {}
+    "D:\\Projects\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {
+    "D:\\Projects\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
+        "projectUniqueName": "D:\\Projects\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
         "projectName": "EchoApp",
-        "projectPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
-        "packagesPath": "C:\\Users\\josdevries\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\obj\\",
+        "projectPath": "D:\\Projects\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
+        "packagesPath": "C:\\Users\\arlan\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\SoftwareDev_Test\\Websocket_Prober\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\josdevries\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arlan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +61,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

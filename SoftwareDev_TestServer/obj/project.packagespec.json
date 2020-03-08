@@ -1,14 +1,11 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
+    "projectUniqueName": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
     "projectName": "SoftwareDev_TestServer",
-    "projectPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
-    "outputPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\obj\\",
+    "projectPath": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
+    "outputPath": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\obj\\",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netcoreapp3.1"
     ],
@@ -53,7 +50,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
     }
   }
 }

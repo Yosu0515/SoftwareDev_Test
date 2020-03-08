@@ -37,3 +37,16 @@ C:\Users\josdevries\Desktop\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcorea
 C:\Users\josdevries\Desktop\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.RazorTargetAssemblyInfo.cache
 C:\Users\josdevries\Desktop\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.dll
 C:\Users\josdevries\Desktop\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.pdb
+D:\Projects\SoftwareDev_Test\Websocket_Prober\bin\Debug\netcoreapp2.1\EchoApp.deps.json
+D:\Projects\SoftwareDev_Test\Websocket_Prober\bin\Debug\netcoreapp2.1\EchoApp.runtimeconfig.json
+D:\Projects\SoftwareDev_Test\Websocket_Prober\bin\Debug\netcoreapp2.1\EchoApp.runtimeconfig.dev.json
+D:\Projects\SoftwareDev_Test\Websocket_Prober\bin\Debug\netcoreapp2.1\EchoApp.dll
+D:\Projects\SoftwareDev_Test\Websocket_Prober\bin\Debug\netcoreapp2.1\EchoApp.pdb
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.csprojAssemblyReference.cache
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.RazorAssemblyInfo.cache
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.RazorAssemblyInfo.cs
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.AssemblyInfoInputs.cache
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.AssemblyInfo.cs
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.RazorTargetAssemblyInfo.cache
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.dll
+D:\Projects\SoftwareDev_Test\Websocket_Prober\obj\Debug\netcoreapp2.1\EchoApp.pdb
