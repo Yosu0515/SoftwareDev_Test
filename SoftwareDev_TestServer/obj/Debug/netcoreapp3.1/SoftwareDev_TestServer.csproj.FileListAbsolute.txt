@@ -34,3 +34,5 @@ C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\ne
 C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\staticwebassets\SoftwareDev_TestServer.StaticWebAssets.xml
 C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.dll
 C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.pdb
+C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.csproj.CopyComplete

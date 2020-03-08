@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.WebSockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Linq;
 
 namespace SoftwareDev_TestServer
 {
@@ -27,7 +30,7 @@ namespace SoftwareDev_TestServer
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseRouting();
             app.UseWebSockets();
 
@@ -49,7 +52,6 @@ namespace SoftwareDev_TestServer
                 {
                     await next();
                 }
-
             });
         }
         
@@ -57,13 +59,18 @@ namespace SoftwareDev_TestServer
         {
             var buffer = new byte[1024 * 4];
             var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+            var converted = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+            const string returnString = "Received, Thank you!";
             
             while (!result.CloseStatus.HasValue)
             {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
+                var buffer2 = Encoding.UTF8.GetBytes(returnString);
+                
+                await webSocket.SendAsync(new ArraySegment<byte>(buffer2, 0, returnString.Length), result.MessageType, result.EndOfMessage, CancellationToken.None);
                 result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
-                Console.WriteLine("Message received and send");
+                
+                Console.WriteLine("Received: " + converted);
             }
             await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }

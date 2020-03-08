@@ -20,9 +20,7 @@
     </div>
     <p></p>
     <div>
-        <label for="sendMessage">Message to send:</label>
-        <input id="sendMessage" disabled />
-        <button id="sendButton" type="submit" disabled>Send</button>
+        <button id="sendButton" type="submit"> Send</button>
         <button id="closeButton" disabled>Close Socket</button>
     </div>
 
@@ -43,7 +41,6 @@
         var connectionUrl = document.getElementById("connectionUrl");
         var connectButton = document.getElementById("connectButton");
         var stateLabel = document.getElementById("stateLabel");
-        var sendMessage = document.getElementById("sendMessage");
         var sendButton = document.getElementById("sendButton");
         var commsLog = document.getElementById("commsLog");
         var closeButton = document.getElementById("closeButton");
@@ -57,7 +54,7 @@
         function updateState() {
             function disable() {
                 sendMessage.disabled = true;
-                sendButton.disabled = true;
+				sendButton.disabled = true;
                 closeButton.disabled = true;
             }
             function enable() {
@@ -110,7 +107,7 @@
             if (!socket || socket.readyState !== WebSocket.OPEN) {
                 alert("socket not connected");
             }
-            var data = sendMessage.value;
+            var data = "{\"a\": 0, \"b\": 1}"
             socket.send(data);
             commsLog.innerHTML += '<tr>' +
                 '<td class="commslog-client">Client</td>' +

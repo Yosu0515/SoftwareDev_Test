@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SampleApp\\EchoApp.csproj": {}
+    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SampleApp\\EchoApp.csproj": {
+    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SampleApp\\EchoApp.csproj",
+        "projectUniqueName": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
         "projectName": "EchoApp",
-        "projectPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SampleApp\\EchoApp.csproj",
+        "projectPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\EchoApp.csproj",
         "packagesPath": "C:\\Users\\josdevries\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SampleApp\\obj\\",
+        "outputPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\Websocket_Prober\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
