@@ -9,15 +9,15 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # CUSTOM
-.xml
-.json
-.config
-.exe
-.pdb
-.cache
-.dll
-.props
-.targets
+*.xml
+*.json
+*.config
+*.exe
+*.pdb
+*.cache
+*.dll
+*.props
+*.targets
 
 # User-specific files
 *.rsuser

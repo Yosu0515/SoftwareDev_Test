@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SoftwareDev_TestServer
+﻿namespace SoftwareDev_TestServer
 {
-    public class TrafficLightModel
+    public class Simulation 
     {
         public string A1 { get; set; }
         public string A2 { get; set; }

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj": {}
+    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj": {
+    "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
+        "projectUniqueName": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
         "projectName": "SoftwareDev_TestServer",
-        "projectPath": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
-        "packagesPath": "C:\\Users\\arlan\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\SoftwareDev_Test\\SoftwareDev_TestServer\\obj\\",
+        "projectPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\SoftwareDev_TestServer.csproj",
+        "packagesPath": "C:\\Users\\josdevries\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josdevries\\Desktop\\SoftwareDev_Test\\SoftwareDev_TestServer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\arlan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josdevries\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[8.6.2, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -61,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

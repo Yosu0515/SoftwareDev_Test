@@ -56,3 +56,4 @@ D:\Projects\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\Soft
 D:\Projects\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.csproj.CopyComplete
 D:\Projects\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.dll
 D:\Projects\SoftwareDev_Test\SoftwareDev_TestServer\obj\Debug\netcoreapp3.1\SoftwareDev_TestServer.pdb
+C:\Users\josdevries\Desktop\SoftwareDev_Test\SoftwareDev_TestServer\bin\Debug\netcoreapp3.1\FluentValidation.dll
