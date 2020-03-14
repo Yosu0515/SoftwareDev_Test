@@ -26,8 +26,8 @@
       <list>
         <option value="$PROJECT_DIR$/TrafficLightModel.cs" />
         <option value="$PROJECT_DIR$/Simulation.cs" />
-        <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/SimulationValidator.cs" />
+        <option value="$PROJECT_DIR$/Startup.cs" />
       </list>
     </option>
   </component>
@@ -90,7 +90,7 @@
       <workItem from="1583411221937" duration="337000" />
       <workItem from="1583683092063" duration="8680000" />
       <workItem from="1583696069269" duration="2221000" />
-      <workItem from="1584200280963" duration="7830000" />
+      <workItem from="1584200280963" duration="8076000" />
     </task>
     <servers />
   </component>
