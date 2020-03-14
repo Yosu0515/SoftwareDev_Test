@@ -51,8 +51,7 @@ namespace SoftwareDev_TestServer
                     if (context.WebSockets.IsWebSocketRequest)
                     {
                         var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        // TODO: Make a ControllerResponse
-                        await SimulationResponse(context, webSocket);
+                        await ControllerResponse(context, webSocket);
                     }
                     else
                     {
@@ -79,6 +78,7 @@ namespace SoftwareDev_TestServer
                     CancellationToken.None);
         }
 
+        // TODO: Make Generic
         private static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
@@ -96,11 +96,54 @@ namespace SoftwareDev_TestServer
                 await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
                     CancellationToken.None);
         }
+        
+        // TODO: Make Generic
+        private static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
+        {
+            var buffer = new byte[1024 * 4];
+            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+            var converted = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+            Console.WriteLine("Json Received: " + converted);
+
+            Controller controller = JsonConvert.DeserializeObject<Controller>(converted);
+
+            StringBuilder stringBuilder = CheckControllerValidation(controller);
+            await Send(buffer, webSocket, result, stringBuilder);
+            
+            if (result.CloseStatus != null)
+                await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
+                    CancellationToken.None);
+        }
 
         private static StringBuilder CheckSimulationValidation(Simulation sim)
         {
-            SimulationValidator val = new SimulationValidator(sim);
+            SimulationValidator val = new SimulationValidator();
             ValidationResult validationResult = val.Validate(sim);
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    Console.WriteLine("Property: " + error.PropertyName + " failed validation. Error: " + error.ErrorMessage);
+                    stringBuilder.Append("Property: " + error.PropertyName + " failed validation. Error: " +
+                                         error.ErrorMessage);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Validation passed!");
+                stringBuilder.Append("Validation passed!");
+            }
+
+            return stringBuilder;
+        }
+        
+        private static StringBuilder CheckControllerValidation(Controller con)
+        {
+            ControllerValidator val = new ControllerValidator();
+            ValidationResult validationResult = val.Validate(con);
             StringBuilder stringBuilder = new StringBuilder();
             
             if (!validationResult.IsValid)

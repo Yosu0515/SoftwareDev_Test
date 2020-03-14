@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace SoftwareDev_TestServer
 {
-    public class SimulationValidator : AbstractValidator<Simulation>
+    public class ControllerValidator : AbstractValidator<Controller>
     {
-        public SimulationValidator()
+        public ControllerValidator()
         {
             RuleFor(p => p.A1)
                 .NotEmpty()
