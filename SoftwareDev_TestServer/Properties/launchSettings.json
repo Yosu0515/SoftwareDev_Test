@@ -1,9 +1,9 @@
 ﻿{
   "iisSettings": {
     "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "anonymousAuthentication": false,
     "iisExpress": {
-      "applicationUrl": "http://localhost:18119",
+      "applicationUrl": "https://trafic.azurewebsites.net:18119",
       "sslPort": 44327
     }
   },
