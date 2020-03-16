@@ -28,7 +28,7 @@ namespace SoftwareDev_TestServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseRouting();
             app.UseWebSockets();
 
@@ -44,9 +44,11 @@ namespace SoftwareDev_TestServer
                     await data;
                 }
                 else context.Response.StatusCode = 400;
-            }
 
-        private static async Task Send(byte[] buffer, WebSocket webSocket, WebSocketReceiveResult result, StringBuilder stringBuilder)
+            });
+        }
+
+        static async Task Send(byte[] buffer, WebSocket webSocket, WebSocketReceiveResult result, StringBuilder stringBuilder)
         {
             string returnString = stringBuilder.ToString();
             
@@ -60,7 +62,7 @@ namespace SoftwareDev_TestServer
         }
 
         // TODO: Make Generic
-        private static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
+        static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
             var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
@@ -79,7 +81,7 @@ namespace SoftwareDev_TestServer
         }
         
         // TODO: Make Generic
-        private static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
+        static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
             var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
@@ -121,7 +123,7 @@ namespace SoftwareDev_TestServer
             return stringBuilder;
         }
         
-        private static StringBuilder CheckControllerValidation(Controller con)
+        static StringBuilder CheckControllerValidation(Controller con)
         {
             ControllerValidator val = new ControllerValidator();
             ValidationResult validationResult = val.Validate(con);
