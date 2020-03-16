@@ -34,36 +34,17 @@ namespace SoftwareDev_TestServer
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Path == "/simulation")
+                if (context.WebSockets.IsWebSocketRequest)
                 {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await SimulationResponse(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    var data = context.Request.Path == "/simulation"
+                    ? SimulationResponse(context, webSocket)
+                    : ControllerResponse(context, webSocket);
+
+                    await data;
                 }
-                else if (context.Request.Path == "/controller") 
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await ControllerResponse(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
-                }
-                else
-                {
-                    await next();
-                }
-            });
-        }
+                else context.Response.StatusCode = 400;
+            }
 
         private static async Task Send(byte[] buffer, WebSocket webSocket, WebSocketReceiveResult result, StringBuilder stringBuilder)
         {
