@@ -28,44 +28,27 @@ namespace SoftwareDev_TestServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseRouting();
             app.UseWebSockets();
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Path == "/simulation")
+                if (context.WebSockets.IsWebSocketRequest)
                 {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await SimulationResponse(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
+                    var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+                    var data = context.Request.Path == "/simulation"
+                    ? SimulationResponse(context, webSocket)
+                    : ControllerResponse(context, webSocket);
+
+                    await data;
                 }
-                else if (context.Request.Path == "/controller") 
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
-                    {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await ControllerResponse(context, webSocket);
-                    }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                    }
-                }
-                else
-                {
-                    await next();
-                }
+                else context.Response.StatusCode = 400;
+
             });
         }
 
-        private static async Task Send(byte[] buffer, WebSocket webSocket, WebSocketReceiveResult result, StringBuilder stringBuilder)
+        static async Task Send(byte[] buffer, WebSocket webSocket, WebSocketReceiveResult result, StringBuilder stringBuilder)
         {
             string returnString = stringBuilder.ToString();
             
@@ -79,7 +62,7 @@ namespace SoftwareDev_TestServer
         }
 
         // TODO: Make Generic
-        private static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
+        static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
             var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
@@ -98,7 +81,7 @@ namespace SoftwareDev_TestServer
         }
         
         // TODO: Make Generic
-        private static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
+        static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
         {
             var buffer = new byte[1024 * 4];
             var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
@@ -140,7 +123,7 @@ namespace SoftwareDev_TestServer
             return stringBuilder;
         }
         
-        private static StringBuilder CheckControllerValidation(Controller con)
+        static StringBuilder CheckControllerValidation(Controller con)
         {
             ControllerValidator val = new ControllerValidator();
             ValidationResult validationResult = val.Validate(con);
