@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace SoftwareDev_TestServer
+namespace SwDev_TestServer
 {
     public class Program
     {

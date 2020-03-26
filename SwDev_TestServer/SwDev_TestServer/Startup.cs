@@ -1,18 +1,21 @@
 using System;
+using System.Net.WebSockets;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
-using FluentValidation.Results;
 using Newtonsoft.Json;
+using SwDev_TestServer.Models;
+using SwDev_TestServer.Validators;
+using Controller = SwDev_TestServer.Models.Controller;
 
-namespace SoftwareDev_TestServer
+namespace SwDev_TestServer
 {
     public class Startup
     {
@@ -33,8 +36,6 @@ namespace SoftwareDev_TestServer
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -70,6 +71,7 @@ namespace SoftwareDev_TestServer
                     else
                     {
                         context.Response.StatusCode = 400;
+                        Console.WriteLine("Not a valid websocket request");
                     }
                 }
                 else if (context.Request.Path == "/controller")
@@ -82,6 +84,7 @@ namespace SoftwareDev_TestServer
                     else
                     {
                         context.Response.StatusCode = 400;
+                        Console.WriteLine("Not a valid websocket request");
                     }
                 }
                 else
@@ -119,8 +122,12 @@ namespace SoftwareDev_TestServer
             await Send(buffer, webSocket, result, stringBuilder);
 
             if (result.CloseStatus != null)
+            {
                 await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
                     CancellationToken.None);
+                Console.WriteLine("Closing Connection");
+            }
+
         }
 
         // TODO: Make Generic
@@ -138,13 +145,16 @@ namespace SoftwareDev_TestServer
             await Send(buffer, webSocket, result, stringBuilder);
 
             if (result.CloseStatus != null)
+            {
                 await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
                     CancellationToken.None);
+                Console.WriteLine("Closing Connection");
+            }
         }
 
         private static StringBuilder CheckSimulationValidation(Simulation sim)
         {
-            SimulationValidator val = new SimulationValidator();
+            SimulationValidation val = new SimulationValidation();
             ValidationResult validationResult = val.Validate(sim);
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -168,7 +178,7 @@ namespace SoftwareDev_TestServer
 
         private static StringBuilder CheckControllerValidation(Controller con)
         {
-            ControllerValidator val = new ControllerValidator();
+            ControllerValidation val = new ControllerValidation();
             ValidationResult validationResult = val.Validate(con);
             StringBuilder stringBuilder = new StringBuilder();
 

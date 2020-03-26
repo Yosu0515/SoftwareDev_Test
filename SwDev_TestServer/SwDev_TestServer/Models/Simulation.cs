@@ -1,4 +1,4 @@
-﻿namespace SoftwareDev_TestServer
+﻿namespace SwDev_TestServer.Models
 {
     public class Simulation
     {
