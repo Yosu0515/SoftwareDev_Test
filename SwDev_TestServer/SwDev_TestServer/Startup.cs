@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -116,11 +115,15 @@ namespace SwDev_TestServer
             {
                 case "/simulation":
                     Simulation simulation = JsonConvert.DeserializeObject<Simulation>(converted);
-                    stringBuilder = CheckSimulationValidation(simulation);
+                    SimulationValidation simVal = new SimulationValidation();
+                    ValidationResult simValResult = simVal.Validate(simulation);
+                    stringBuilder = Validate(simValResult);
                     break;
                 case "/controller":
                     Controller controller = JsonConvert.DeserializeObject<Controller>(converted);
-                    stringBuilder = CheckControllerValidation(controller);
+                    ControllerValidation contVal = new ControllerValidation();
+                    ValidationResult contValResult = contVal.Validate(controller);
+                    stringBuilder = Validate(contValResult);
                     break;
                 default:
                 context.Response.StatusCode = 400;
@@ -139,36 +142,10 @@ namespace SwDev_TestServer
             await Send(buffer, clientConnection, result, stringBuilder);
         }
 
-        private static StringBuilder CheckSimulationValidation(Simulation sim)
+        private static StringBuilder Validate(ValidationResult validationResult)
         {
-            SimulationValidation val = new SimulationValidation();
-            ValidationResult validationResult = val.Validate(sim);
             StringBuilder stringBuilder = new StringBuilder();
-
-            if (!validationResult.IsValid)
-            {
-                foreach (var error in validationResult.Errors)
-                {
-                    Console.WriteLine("Property: " + error.PropertyName + " failed validation. Error: " + error.ErrorMessage);
-                    stringBuilder.Append("Property: " + error.PropertyName + " failed validation. Error: " +
-                                         error.ErrorMessage);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Validation passed!");
-                stringBuilder.Append("Validation passed!");
-            }
-
-            return stringBuilder;
-        }
-
-        private static StringBuilder CheckControllerValidation(Controller con)
-        {
-            ControllerValidation val = new ControllerValidation();
-            ValidationResult validationResult = val.Validate(con);
-            StringBuilder stringBuilder = new StringBuilder();
-
+            
             if (!validationResult.IsValid)
             {
                 foreach (var error in validationResult.Errors)
