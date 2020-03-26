@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -19,6 +20,9 @@ namespace SwDev_TestServer
 {
     public class Startup
     {
+        public Boolean isConnected = false;
+        private WebSocket clientConnection = null;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -52,8 +56,7 @@ namespace SwDev_TestServer
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseWebSockets();
@@ -61,35 +64,22 @@ namespace SwDev_TestServer
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Path == "/simulation")
+                if (context.WebSockets.IsWebSocketRequest)
                 {
-                    if (context.WebSockets.IsWebSocketRequest)
+                    try
                     {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await SimulationResponse(context, webSocket);
+                        clientConnection = await context.WebSockets.AcceptWebSocketAsync();
+                        isConnected = true;
                     }
-                    else
+                    catch (WebSocketException e)
                     {
-                        context.Response.StatusCode = 400;
-                        Console.WriteLine("Not a valid websocket request");
+                        Console.WriteLine(e);
                     }
-                }
-                else if (context.Request.Path == "/controller")
-                {
-                    if (context.WebSockets.IsWebSocketRequest)
+
+                    while (isConnected)
                     {
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await ControllerResponse(context, webSocket);
+                        await Response(context, clientConnection);
                     }
-                    else
-                    {
-                        context.Response.StatusCode = 400;
-                        Console.WriteLine("Not a valid websocket request");
-                    }
-                }
-                else
-                {
-                    await next();
                 }
             });
         }
@@ -107,49 +97,46 @@ namespace SwDev_TestServer
                     CancellationToken.None);
         }
 
-        // TODO: Make Generic
-        private static async Task SimulationResponse(HttpContext context, WebSocket webSocket)
+        private static async Task Response(HttpContext context, WebSocket clientConnection)
         {
             var buffer = new byte[1024 * 4];
-            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
+            var result = await clientConnection.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            if (result.MessageType == WebSocketMessageType.Close)
+            {
+                await clientConnection.CloseAsync(WebSocketCloseStatus.NormalClosure, "Close received, closing", CancellationToken.None);
+            }
+            
             var converted = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
             Console.WriteLine("Json Received: " + converted);
-
-            Simulation simulation = JsonConvert.DeserializeObject<Simulation>(converted);
-
-            StringBuilder stringBuilder = CheckSimulationValidation(simulation);
-            await Send(buffer, webSocket, result, stringBuilder);
-
-            if (result.CloseStatus != null)
+            
+            // Switch statement to determine which response should be given depending on the httpcontext request path
+            switch (context.Request.Path)
             {
-                await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
-                    CancellationToken.None);
-                Console.WriteLine("Closing Connection");
+                case "/simulation":
+                    Simulation simulation = JsonConvert.DeserializeObject<Simulation>(converted);
+                    stringBuilder = CheckSimulationValidation(simulation);
+                    break;
+                case "/controller":
+                    Controller controller = JsonConvert.DeserializeObject<Controller>(converted);
+                    stringBuilder = CheckControllerValidation(controller);
+                    break;
+                default:
+                context.Response.StatusCode = 400;
+                Console.WriteLine("Invalid http path");
+                await clientConnection.CloseAsync(WebSocketCloseStatus.EndpointUnavailable, "Closed", CancellationToken.None);
+                break;
             }
+            
+            //     if (result.CloseStatus != null)
+            //     {
+            //         await clientConnection.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
+            //             CancellationToken.None);
+            //         Console.WriteLine("Closing Connection");
+            //     }
 
-        }
-
-        // TODO: Make Generic
-        private static async Task ControllerResponse(HttpContext context, WebSocket webSocket)
-        {
-            var buffer = new byte[1024 * 4];
-            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
-            var converted = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
-            Console.WriteLine("Json Received: " + converted);
-
-            Controller controller = JsonConvert.DeserializeObject<Controller>(converted);
-
-            StringBuilder stringBuilder = CheckControllerValidation(controller);
-            await Send(buffer, webSocket, result, stringBuilder);
-
-            if (result.CloseStatus != null)
-            {
-                await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription,
-                    CancellationToken.None);
-                Console.WriteLine("Closing Connection");
-            }
+            await Send(buffer, clientConnection, result, stringBuilder);
         }
 
         private static StringBuilder CheckSimulationValidation(Simulation sim)
